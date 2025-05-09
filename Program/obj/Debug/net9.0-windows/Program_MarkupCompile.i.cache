@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\c#\flashcards\Program\obj\Debug\net9.0-windows\
+C:\Users\lukas\c#\Program\obj\Debug\net9.0-windows\
 Program
 none
 false
 TRACE;DEBUG;NET;NET9_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NET9_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
-D:\c#\flashcards\Program\App.xaml
-11407045341
+C:\Users\lukas\c#\Program\App.xaml
+2-1932715505
 
-6-1099988308
+11-1853024789
 200-423684338
-MainWindow.xaml;
+view\addFromFiel.xaml;view\Main.xaml;
 
 False
 
