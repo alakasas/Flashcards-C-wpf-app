@@ -9,6 +9,13 @@ namespace Program.models
 {
     public class Flashcards
     {
-        HashSet<Flashcard> SetOfFleshcards {  get; set; }
+
+        public Flashcards(string path) { 
+            this.Path = path;
+            this.SetOfFlashcards = new HashSet<Flashcard>();
+        }
+        public HashSet<Flashcard> SetOfFlashcards {  get; set; }
+        public string Path { get; set; }
+
     }
 }

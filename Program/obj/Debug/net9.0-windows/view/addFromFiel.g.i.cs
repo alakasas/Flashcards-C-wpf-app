@@ -61,7 +61,7 @@ namespace Program.view {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Program;V1.0.0.0;component/view/addfromfiel.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Program;component/view/addfromfiel.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\view\addFromFiel.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

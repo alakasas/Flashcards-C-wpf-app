@@ -4,15 +4,16 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Program.models;
 
 namespace Program.functions
 {
     public static class FlashcardsRW
     {
-        public static HashSet<Flashcard> ReadFlashCards(string filepath)
+        public static Flashcards ReadFlashCards(string filepath)
         {
-            var result = new HashSet<Flashcard>();
+            Flashcards result = new Flashcards(filepath);
             bool question = true;
             string line;
             Flashcard oneFlashcard = new Flashcard();
@@ -29,7 +30,7 @@ namespace Program.functions
                     }
                     else {
                         oneFlashcard.Answer = line;
-                        result.Add(oneFlashcard);
+                        result.SetOfFlashcards.Add(oneFlashcard);
                         question = true;
                     }
                 }
@@ -37,11 +38,11 @@ namespace Program.functions
             return result;
         }
 
-        public static void WriteFlashCards(HashSet<Flashcard> flashcards, string filepath)
+        public static void WriteFlashCards(Flashcards flashcards)
         {
-            using (StreamWriter writer = new StreamWriter(filepath))
+            using (StreamWriter writer = new StreamWriter(flashcards.Path, append:false))
             {
-                foreach (Flashcard flashcard in flashcards){
+                foreach (Flashcard flashcard in flashcards.SetOfFlashcards){
                     writer.WriteLine(flashcard.Question);
                     writer.WriteLine(flashcard.Answer);
                 }

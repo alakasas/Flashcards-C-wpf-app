@@ -5,18 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Program.view"
         mc:Ignorable="d"
-        Title="Window1" Height="450" Width="800">
+        Title="Window1" Height="450" Width="800"
+        Closing="Window_Closing">
+
     <Grid ShowGridLines="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="75"/>
 
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="75"/>
 
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
 
 
@@ -24,12 +28,17 @@
             <StackPanel x:Name="FlashcardPanel" />
         </ScrollViewer>
 
+        <Button x:Name="GoLeft" Click="GoLeft_Click" Grid.Column="1" Grid.Row="1" Margin="10,150,10,150" RenderTransformOrigin="0.662,0.811" Background="Black"></Button>
+        <Button x:Name="GoRight" Click="GoRight_Click" Grid.Column="3" Grid.Row="1" Margin="10,150,10,150" RenderTransformOrigin="0.662,0.811" Background="Black"></Button>
+        <Button x:Name="MainFlashcard" Click="MainFlashcard_Click" Grid.Column="2" Grid.Row="1" Margin="50,70" RenderTransformOrigin="0.362,0.386"/>
 
+        <Button Click="Swap" Grid.Column="2" Margin="327,10,23,0">SWAP</Button>
         <TextBlock x:Name="FlashcardDetail"
                Grid.Column="0"
                Text="Vyber flashcard zo zoznamu"
                
                TextWrapping="Wrap"/>
-        <Button Grid.Column="0" Grid.Row="2" Click="Button_Click"> pridat zo subora  </Button>
+        <Button Grid.Column="0" Grid.Row="2" Click="Button_Click" Margin="10,13,95,10">pridat zo subora</Button>
+        <Button Grid.Column="0" Grid.Row="2" Click="CreateNew" Margin="110,13,10,10">create new</Button>
     </Grid>
 </Window>

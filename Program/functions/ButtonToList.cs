@@ -10,7 +10,7 @@ using Program.view;
 
 namespace Program.functions
 {
-    public static class ButtonToList
+    public static class LoadFlashcardButtons
     {
 
 
