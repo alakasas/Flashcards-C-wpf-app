@@ -3,11 +3,9 @@ C:\Users\lukas\c#\Program\bin\Debug\net9.0-windows\Program.deps.json
 C:\Users\lukas\c#\Program\bin\Debug\net9.0-windows\Program.runtimeconfig.json
 C:\Users\lukas\c#\Program\bin\Debug\net9.0-windows\Program.dll
 C:\Users\lukas\c#\Program\bin\Debug\net9.0-windows\Program.pdb
-C:\Users\lukas\c#\Program\obj\Debug\net9.0-windows\view\Main.g.cs
 C:\Users\lukas\c#\Program\obj\Debug\net9.0-windows\App.g.cs
 C:\Users\lukas\c#\Program\obj\Debug\net9.0-windows\Program_MarkupCompile.cache
 C:\Users\lukas\c#\Program\obj\Debug\net9.0-windows\Program_MarkupCompile.lref
-C:\Users\lukas\c#\Program\obj\Debug\net9.0-windows\view\Main.baml
 C:\Users\lukas\c#\Program\obj\Debug\net9.0-windows\Program.g.resources
 C:\Users\lukas\c#\Program\obj\Debug\net9.0-windows\Program.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\lukas\c#\Program\obj\Debug\net9.0-windows\Program.AssemblyInfoInputs.cache
@@ -24,3 +22,6 @@ C:\Users\lukas\c#\Program\obj\Debug\net9.0-windows\view\addOneFlashcard.g.cs
 C:\Users\lukas\c#\Program\obj\Debug\net9.0-windows\view\addOneFlashcard.baml
 C:\Users\lukas\c#\Program\obj\Debug\net9.0-windows\view\rename.g.cs
 C:\Users\lukas\c#\Program\obj\Debug\net9.0-windows\view\rename.baml
+C:\Users\lukas\c#\Program\obj\Debug\net9.0-windows\App.baml
+C:\Users\lukas\c#\Program\obj\Debug\net9.0-windows\view\Main.g.cs
+C:\Users\lukas\c#\Program\obj\Debug\net9.0-windows\view\Main.baml

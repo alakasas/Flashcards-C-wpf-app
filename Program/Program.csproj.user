@@ -8,9 +8,6 @@
     <Compile Update="view\addOneFlashcard.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="view\Main.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="view\rename.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

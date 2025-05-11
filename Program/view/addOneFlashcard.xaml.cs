@@ -35,12 +35,16 @@ namespace Program.view
             Flashcard newFlascard = new Flashcard();
             newFlascard.Question = Qes.Text;
             newFlascard.Answer = Ans.Text;
-
             Flashcards flashcards = (Flashcards) sourceButton.Tag;
+
             flashcards.SetOfFlashcards.Add(newFlascard);
-            list.Add(newFlascard);
+
+            if (list != null) 
+                list.Add(newFlascard);
+
             sourceButton.Tag = flashcards;
-            
+
+
 
             this.Close();
 

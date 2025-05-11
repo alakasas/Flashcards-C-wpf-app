@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Program.view"
         mc:Ignorable="d"
-        Title="Window1" Height="450" Width="800"
+        Title="Window1" Height="424" Width="881"
         Closing="Window_Closing">
 
-    <Grid ShowGridLines="True">
+    <Grid ShowGridLines="False">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="75"/>
@@ -23,22 +23,70 @@
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
 
+        <Line Fill="Black" Stroke="Black" StrokeThickness="8"></Line>
+
+        <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="3">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFB28FB8"/>
+                    <GradientStop Color="#FF595386" Offset="0.144"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+
+        <!-- Oddelovacia čiara -->
+
+        <!-- Zvyšok rozhrania -->
+        <Border
+            Grid.Column="1"
+            Grid.RowSpan="3"
+            Grid.ColumnSpan="3" Background="#FF4874A8"
+            >
+            <Border
+            Width="4"
+            HorizontalAlignment="Left" Margin="0,10,0,0"
+            Panel.ZIndex="100">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black" Offset="0.5"/>
+                        <GradientStop Color="#00000000" Offset="0"/>
+                        <GradientStop Color="#00000000" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+        </Border>
 
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="0">
             <StackPanel x:Name="FlashcardPanel" />
         </ScrollViewer>
 
-        <Button x:Name="GoLeft" Click="GoLeft_Click" Grid.Column="1" Grid.Row="1" Margin="10,150,10,150" RenderTransformOrigin="0.662,0.811" Background="Black"></Button>
-        <Button x:Name="GoRight" Click="GoRight_Click" Grid.Column="3" Grid.Row="1" Margin="10,150,10,150" RenderTransformOrigin="0.662,0.811" Background="Black"></Button>
-        <Button x:Name="MainFlashcard" Click="MainFlashcard_Click" Grid.Column="2" Grid.Row="1" Margin="50,70" RenderTransformOrigin="0.362,0.386"/>
+        <Button x:Name="GoLeft" Click="GoLeft_Click" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Margin="20,65,0,65" RenderTransformOrigin="0.662,0.811" Background="#FF4CC6CF" MouseEnter="MouseEnterButonEvent" MouseLeave="MouseLeaveButonEvent"></Button>
+        <Button x:Name="GoRight" Click="GoRight_Click" Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" Margin="0,65,20,65" RenderTransformOrigin="0.662,0.811" Background="#FF4CC6CF" MouseEnter="MouseEnterButonEvent" MouseLeave="MouseLeaveButonEvent"></Button>
 
-        <Button Click="Swap" Grid.Column="2" Margin="327,10,23,0">SWAP</Button>
+        <Button x:Name="MainFlashcardButton" Click="MainFlashcard_Click" Grid.Column="2" Margin="29,20" RenderTransformOrigin="0.362,0.386" FontWeight="Bold" FontSize="30" Background="#FF4C98CF" MouseEnter="MouseEnterButonEvent" MouseLeave="MouseLeaveButonEvent" Grid.RowSpan="2">
+
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="30"/>
+                </Style>
+            </Button.Resources>
+            <TextBlock  x:Name="MainFlashcard"
+                        TextWrapping="Wrap"
+                        TextAlignment="Center"/>
+        </Button>
+
+        <Button Click="Swap" Grid.Column="1" Margin="20,10,0,10" Background="#FF4CC6CF" MouseEnter="MouseEnterButonEvent" MouseLeave="MouseLeaveButonEvent" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="113">SWAP</Button>
         <TextBlock x:Name="FlashcardDetail"
                Grid.Column="0"
-               Text="Vyber flashcard zo zoznamu"
-               
-               TextWrapping="Wrap"/>
-        <Button Grid.Column="0" Grid.Row="2" Click="Button_Click" Margin="10,13,95,10">pridat zo subora</Button>
-        <Button Grid.Column="0" Grid.Row="2" Click="CreateNew" Margin="110,13,10,10">create new</Button>
+               Text="Zoznam Flashcards"
+               TextAlignment="Center"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+               TextWrapping="Wrap" FontSize="18" FontWeight="Bold"/>
+        <Button Grid.Column="0" Grid.Row="2" Click="Button_Click" Margin="10,10,95,10" Background="#b28fb8" MouseEnter="MouseEnterButonEvent" MouseLeave="MouseLeaveButonEvent" >pridat zo subora</Button>
+        <Button Grid.Column="0" Grid.Row="2" Click="CreateNew" Margin="110,10,10,10" Background="#FFB28FB8" MouseEnter="MouseEnterButonEvent" MouseLeave="MouseLeaveButonEvent">create new</Button>
+        <Button Click="ChangeFlashcardEvent" Grid.Column="2" Margin="63,10,0,10" Background="#FF4CC6CF" MouseEnter="MouseEnterButonEvent" MouseLeave="MouseLeaveButonEvent" Grid.Row="2" HorizontalAlignment="Left" Width="113" Content="Change"/>
+        <Button Click="DeleteFlashcardEvent" Grid.Column="2" Margin="181,10,0,10" Background="#FF4CC6CF" MouseEnter="MouseEnterButonEvent" MouseLeave="MouseLeaveButonEvent" Grid.Row="2" HorizontalAlignment="Left" Width="113" Content="Delete"/>
     </Grid>
 </Window>

@@ -34,13 +34,10 @@ namespace Program.view
 
             string OldFilePath = flashcards.Path;
 
-           
-
             string newPath = Path.Combine(Path.GetDirectoryName(OldFilePath), NewName.Text + ".txt");
 
             File.Move(OldFilePath, newPath);
 
-            MessageBox.Show("qweqwe");
             this.Close();
         }
     }

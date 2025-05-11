@@ -17,8 +17,8 @@ namespace Program.functions
             bool question = true;
             string line;
             Flashcard oneFlashcard = new Flashcard();
-
             using (StreamReader reader = new StreamReader(filepath))
+                
             {
                 while ((line = reader.ReadLine()) != null)
                 {

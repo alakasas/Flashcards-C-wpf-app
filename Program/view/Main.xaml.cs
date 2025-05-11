@@ -3,7 +3,7 @@ using System.IO;
 using System.Runtime.Intrinsics.X86;
 using System.Windows;
 using System.Windows.Controls;
-
+using System.Windows.Media;
 using System.Xml.Serialization;
 using Program.functions;
 using Program.models;
@@ -18,6 +18,8 @@ namespace Program.view
         List<Flashcard> list;
         int idx;
         string folderPath = Path.GetFullPath(@"..\..\..\filesFlashCards");
+        Brush ButtonBrush;
+        Button curentlyClickedButton;
         public Window1()
         {
             MessageBox.Show("Current Directory: " + Environment.CurrentDirectory);
@@ -26,19 +28,18 @@ namespace Program.view
             LoadFlashcardFiles();
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        { 
-        }
         private void LoadFlashcardFiles()
         {
             FlashcardPanel.Children.Clear();
-            
+
             string[] files = Directory.GetFiles(folderPath, "*.txt");
+
             foreach (var file in files)
             {
+                
                 string fileName = Path.GetFileNameWithoutExtension(file);
 
-                var flashcards = FlashcardsRW.ReadFlashCards(file); 
+                var flashcards = FlashcardsRW.ReadFlashCards(file);
 
                 AddButtonToLeft(FlashcardPanel, fileName, flashcards);
             }
@@ -48,11 +49,19 @@ namespace Program.view
             Button button = new Button
             {
                 Content = fileName,
-                Margin = new Thickness(5),
-                Tag = flashcards
+                Height = 30,
+                Margin = new Thickness(15, 4, 15, 4),
+                Tag = flashcards,
+                Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFB28FB8")),
+                FontSize = 12,
+                BorderThickness = new Thickness(2),
+                FontWeight = FontWeights.Bold,
+                
 
             };
             button.Click += showFlashcardsClick;
+            button.MouseEnter += MouseEnterButonEvent;
+            button.MouseLeave += MouseLeaveButonEvent;
             ContextMenu contextMenu = new ContextMenu();
 
             MenuItem item1 = new MenuItem();
@@ -104,9 +113,9 @@ namespace Program.view
             }
                 
             rename rename = new rename(myButton);
-            MessageBox.Show("dffff");
+
             rename.ShowDialog();
-            MessageBox.Show("asdfasdf");
+
             LoadFlashcardFiles();
         }
             
@@ -129,58 +138,68 @@ namespace Program.view
         {
             Button clickedButton = sender as Button;
             if (clickedButton != null){
+                curentlyClickedButton = clickedButton;
                 Flashcards currentFlashcards = (Flashcards) clickedButton.Tag;
                 list = currentFlashcards.SetOfFlashcards.ToList();
                 idx = 0;
                 if (list.Count > 0)
-                    showAnotherFlashcard(list, idx);
+                    showAnotherFlashcard();
                 else
-                    {
-                    MainFlashcard.Tag = null;
-                    MainFlashcard.Content = "";
-                    }
+                {
+                    MainFlashcardButton.Tag = null;
+                    MainFlashcard.Text = "";
+                }
             }
            
 
         }
 
-        private void showAnotherFlashcard(List<Flashcard> list, int idx)
+        private void showAnotherFlashcard()
         {
+            if(list != null && list.Count != 0 && idx >= 0)
+            {
+                MainFlashcardButton.Tag = list[idx];
+                MainFlashcard.Text = list[idx].Question;
 
-            MainFlashcard.Tag = list[idx];
-            MainFlashcard.Content = list[idx].Question;
-
+            }
+            else
+            {
+                MainFlashcardButton.Tag = null;
+                MainFlashcard.Text = "";
+            }
+                
         }
 
         private void GoLeft_Click(object sender, RoutedEventArgs e)
         {
-            if (MainFlashcard.Tag != null)
+            if (MainFlashcardButton.Tag != null)
             {
                 idx = (idx + list.Count - 1) % list.Count;
                 MessageBox.Show(idx.ToString());
-                showAnotherFlashcard(list, idx);
+                showAnotherFlashcard();
             }
         }
 
         private void GoRight_Click(object sender, RoutedEventArgs e)
         {
-            if (MainFlashcard.Tag != null)
+            if (MainFlashcardButton.Tag != null)
             {
                 idx = (idx + 1) % list.Count;
-                showAnotherFlashcard(list, idx);
+                showAnotherFlashcard();
             }
         }
 
         private void MainFlashcard_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            if (button.Tag != null)
+            if (MainFlashcard.Text != "")
             {
                 Flashcard flashcard = (Flashcard)button.Tag;
-                if (flashcard.Question == button.Content)
-                    button.Content = flashcard.Answer;
+                
+                if (flashcard.Question == MainFlashcard.Text)
+                    MainFlashcard.Text = flashcard.Answer;
                 else
-                    button.Content = flashcard.Question;
+                    MainFlashcard.Text = flashcard.Question;
             }
         }
 
@@ -197,7 +216,7 @@ namespace Program.view
                     item.Answer = aux_string;
                 }
 
-                showAnotherFlashcard(list, idx);
+                showAnotherFlashcard();
             }
         }
 
@@ -216,15 +235,59 @@ namespace Program.view
         {
             string newFileName = "new";
             int num = 0;
-            string filePath = Path.Combine(folderPath, "new.txt");
+            string filePath = Path.Combine(folderPath, "new" + num.ToString() + ".txt");
             while (File.Exists(filePath))
             {
                 num++;
                 filePath = Path.Combine(folderPath,"new" + num.ToString() + ".txt");
             }
-            File.Create(filePath);
-            Button button = AddButtonToLeft(FlashcardPanel, "new" + num.ToString(), new Flashcards(filePath));
+            using (File.Create(filePath)) { }
+            LoadFlashcardFiles();
+        }
+
+        private void MouseEnterButonEvent(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+
+            Button button = sender as Button;
+            ButtonBrush = button.Background;
+
+            SolidColorBrush oldSolidColor =  button.Background as SolidColorBrush;
+            Color Oldcolor = oldSolidColor.Color;
+            Color lighter = Color.FromRgb(
+                (byte) Math.Max(Oldcolor.R - 30, 30),
+                (byte) Math.Max(Oldcolor.G - 30, 30),
+                (byte) Math.Max(Oldcolor.B - 30, 30)
+            );
+            button.Background = new SolidColorBrush(lighter);
+        }
+
+        private void MouseLeaveButonEvent(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            Button btn = sender as Button;
+            btn.Background = ButtonBrush;
+        }
+
+        private void ChangeFlashcardEvent(object sender, RoutedEventArgs e)
+        {
+
+
+        }
+
+        private void DeleteFlashcardEvent(object sender, RoutedEventArgs e)
+        {
+            if (list != null && list.Count != 0)
+            {
+                MessageBox.Show("1");
+                Flashcards flashcards = (Flashcards)curentlyClickedButton.Tag;
+                MessageBox.Show("w");
+                flashcards.SetOfFlashcards.Remove(list[idx]);
+                list.RemoveAt(idx);
+                if(list.Count > 0 )
+                    idx = (idx - 1 + list.Count) % list.Count;
+                showAnotherFlashcard();
+                }
+            }
+
         }
     }
     
-}
