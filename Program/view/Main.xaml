@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Program.view"
         mc:Ignorable="d"
-        Title="Window1" Height="424" Width="881"
+        Title="Window1" Height="437" Width="1018"
         Closing="Window_Closing">
 
     <Grid ShowGridLines="False">
@@ -61,8 +61,16 @@
             <StackPanel x:Name="FlashcardPanel" />
         </ScrollViewer>
 
-        <Button x:Name="GoLeft" Click="GoLeft_Click" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Margin="20,65,0,65" RenderTransformOrigin="0.662,0.811" Background="#FF4CC6CF" MouseEnter="MouseEnterButonEvent" MouseLeave="MouseLeaveButonEvent"></Button>
-        <Button x:Name="GoRight" Click="GoRight_Click" Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" Margin="0,65,20,65" RenderTransformOrigin="0.662,0.811" Background="#FF4CC6CF" MouseEnter="MouseEnterButonEvent" MouseLeave="MouseLeaveButonEvent"></Button>
+        <Button x:Name="GoLeft" Click="GoLeft_Click" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Margin="20,65,0,65" RenderTransformOrigin="0.662,0.811" Background="#FF4C98CF" MouseEnter="MouseEnterButonEvent" MouseLeave="MouseLeaveButonEvent">
+            <Canvas Width="40" Height="60" RenderTransformOrigin="0.5,0.5"  >
+                <Polygon Points="0,30 40,60 40,0" Fill="#FF4CC6CF"/>
+            </Canvas>
+        </Button>
+        <Button x:Name="GoRight" Click="GoRight_Click" Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" Margin="0,65,20,65" RenderTransformOrigin="0.662,0.811" Background="#FF4C98CF" MouseEnter="MouseEnterButonEvent" MouseLeave="MouseLeaveButonEvent">
+            <Canvas Width="40" Height="60">
+                <Polygon Points="40,30 0,60 0,0" Fill="#FF4CC6CF"/>
+            </Canvas>
+        </Button>
 
         <Button x:Name="MainFlashcardButton" Click="MainFlashcard_Click" Grid.Column="2" Margin="29,20" RenderTransformOrigin="0.362,0.386" FontWeight="Bold" FontSize="30" Background="#FF4C98CF" MouseEnter="MouseEnterButonEvent" MouseLeave="MouseLeaveButonEvent" Grid.RowSpan="2">
 
@@ -76,7 +84,7 @@
                         TextAlignment="Center"/>
         </Button>
 
-        <Button Click="Swap" Grid.Column="1" Margin="20,10,0,10" Background="#FF4CC6CF" MouseEnter="MouseEnterButonEvent" MouseLeave="MouseLeaveButonEvent" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="113">SWAP</Button>
+        <Button Click="Swap" Grid.Column="1" Margin="20,10,0,10" Background="#FF4CC6CF" MouseEnter="MouseEnterButonEvent" MouseLeave="MouseLeaveButonEvent" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="94">SWAP</Button>
         <TextBlock x:Name="FlashcardDetail"
                Grid.Column="0"
                Text="Zoznam Flashcards"
@@ -84,9 +92,11 @@
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                TextWrapping="Wrap" FontSize="18" FontWeight="Bold"/>
-        <Button Grid.Column="0" Grid.Row="2" Click="Button_Click" Margin="10,10,95,10" Background="#b28fb8" MouseEnter="MouseEnterButonEvent" MouseLeave="MouseLeaveButonEvent" >pridat zo subora</Button>
+        <Button Grid.Column="0" Grid.Row="2" Click="AddFromFile" Margin="10,10,95,10" Background="#b28fb8" MouseEnter="MouseEnterButonEvent" MouseLeave="MouseLeaveButonEvent" >pridat zo subora</Button>
         <Button Grid.Column="0" Grid.Row="2" Click="CreateNew" Margin="110,10,10,10" Background="#FFB28FB8" MouseEnter="MouseEnterButonEvent" MouseLeave="MouseLeaveButonEvent">create new</Button>
-        <Button Click="ChangeFlashcardEvent" Grid.Column="2" Margin="63,10,0,10" Background="#FF4CC6CF" MouseEnter="MouseEnterButonEvent" MouseLeave="MouseLeaveButonEvent" Grid.Row="2" HorizontalAlignment="Left" Width="113" Content="Change"/>
-        <Button Click="DeleteFlashcardEvent" Grid.Column="2" Margin="181,10,0,10" Background="#FF4CC6CF" MouseEnter="MouseEnterButonEvent" MouseLeave="MouseLeaveButonEvent" Grid.Row="2" HorizontalAlignment="Left" Width="113" Content="Delete"/>
+        <Button x:Name="ChangeButton" Click="ChangeFlashcardEvent" Grid.Column="2" Margin="43,10,0,10" Background="#FF4CC6CF" MouseEnter="MouseEnterButonEvent" MouseLeave="MouseLeaveButonEvent" Grid.Row="2" HorizontalAlignment="Left" Width="93" Content="Change"/>
+        <Button Click="DeleteFlashcardEvent" Grid.Column="2" Margin="140,10,0,10" Background="#FF4CC6CF" MouseEnter="MouseEnterButonEvent" MouseLeave="MouseLeaveButonEvent" Grid.Row="2" HorizontalAlignment="Left" Width="94" Content="Delete"/>
+        <Button Click="ScoreButtonClickEvent" Grid.Column="2" Margin="0,10,20,10" Background="#FF4CC6CF" MouseEnter="MouseEnterButonEvent" MouseLeave="MouseLeaveButonEvent" Grid.Row="2" Content="Score" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="113"/>
+        <Button x:Name="randomButton" Click="ScoreButtonClickEvent" Grid.Column="2" Margin="0,10,63,10" Background="#FF4CC6CF" MouseEnter="MouseEnterButonEvent" MouseLeave="MouseLeaveButonEvent" Grid.Row="2" Content="Random Score" HorizontalAlignment="Right" Width="113"/>
     </Grid>
 </Window>

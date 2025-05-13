@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Program.view"
         mc:Ignorable="d"
-        Title="rename" Height="270" Width="617">
-    <Grid Margin="0,0,0,0">
-        <TextBox x:Name="NewName" Margin="30,130,31,46"></TextBox>
-        <Button Click="ClickRename" Margin="376,29,31,156">Change</Button>
+        Title="rename" Height="123" Width="311">
+    <Grid Background="#FF4874A8" Margin="0,0,0,-6">
+        <TextBox x:Name="NewName" Margin="19,47,19,0" Background="#FF4C98CF" FontSize="18" Height="30" VerticalAlignment="Top"/>
+        <Button Click="ClickRename" Margin="0,5,19,0" Background="#FF4CC6CF" Height="34" VerticalAlignment="Top" HorizontalAlignment="Right" Width="121">Change</Button>
+        <TextBlock Grid.Row="0" FontSize="24" FontWeight="Bold" LineHeight="6" Margin="20,5,0,0" HorizontalAlignment="Left" Width="144" Height="41" VerticalAlignment="Top">New name</TextBlock>
     </Grid>
 </Window>

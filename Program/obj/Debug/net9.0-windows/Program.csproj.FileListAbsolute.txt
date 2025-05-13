@@ -25,3 +25,5 @@ C:\Users\lukas\c#\Program\obj\Debug\net9.0-windows\view\rename.baml
 C:\Users\lukas\c#\Program\obj\Debug\net9.0-windows\App.baml
 C:\Users\lukas\c#\Program\obj\Debug\net9.0-windows\view\Main.g.cs
 C:\Users\lukas\c#\Program\obj\Debug\net9.0-windows\view\Main.baml
+C:\Users\lukas\c#\Program\obj\Debug\net9.0-windows\view\ScoreModeWindow.g.cs
+C:\Users\lukas\c#\Program\obj\Debug\net9.0-windows\view\ScoreModeWindow.baml

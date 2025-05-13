@@ -22,32 +22,47 @@ namespace Program.view
     {
         private Button sourceButton;
         private List<Flashcard> list;
-        public addOneFlashcard(Button button, List<Flashcard> list)
+        private bool rename;
+        private int idx;
+
+        public addOneFlashcard(Button button, List<Flashcard> list, bool rename=false, int idx=0)
         {
             InitializeComponent();
             sourceButton = button;
             this.list = list;
+            this.rename = rename;
+            this.idx = idx;
+
+            if (rename)
+            {
+                Qes.Text = list[idx].Question;
+                Ans.Text = list[idx].Answer;
+                AddChangeButton.Content = "Change";
+            }
         }
 
         private async void addFlashcard(object sender, RoutedEventArgs e)
         {
-            
-            Flashcard newFlascard = new Flashcard();
-            newFlascard.Question = Qes.Text;
-            newFlascard.Answer = Ans.Text;
-            Flashcards flashcards = (Flashcards) sourceButton.Tag;
-
-            flashcards.SetOfFlashcards.Add(newFlascard);
-
-            if (list != null) 
+            if (!rename)
+            {
+                Flashcard newFlascard = new Flashcard();
+                newFlascard.Question = Qes.Text;
+                newFlascard.Answer = Ans.Text;
                 list.Add(newFlascard);
 
+            }
+            else
+            {
+                list[idx].Question = Qes.Text;
+                list[idx].Answer = Ans.Text;
+            }
+            Flashcards flashcards = (Flashcards)sourceButton.Tag;
+            flashcards.SetOfFlashcards = list;
             sourceButton.Tag = flashcards;
-
-
 
             this.Close();
 
         }
+
     }
 }

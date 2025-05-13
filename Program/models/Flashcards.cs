@@ -12,9 +12,9 @@ namespace Program.models
 
         public Flashcards(string path) { 
             this.Path = path;
-            this.SetOfFlashcards = new HashSet<Flashcard>();
+            this.SetOfFlashcards = new List<Flashcard>();
         }
-        public HashSet<Flashcard> SetOfFlashcards {  get; set; }
+        public List<Flashcard> SetOfFlashcards {  get; set; }
         public string Path { get; set; }
 
     }

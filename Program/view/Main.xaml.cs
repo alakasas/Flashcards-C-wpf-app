@@ -22,8 +22,6 @@ namespace Program.view
         Button curentlyClickedButton;
         public Window1()
         {
-            MessageBox.Show("Current Directory: " + Environment.CurrentDirectory);
-            MessageBox.Show("Hello from normal mode!");
             InitializeComponent();
             LoadFlashcardFiles();
         }
@@ -63,12 +61,12 @@ namespace Program.view
             button.MouseEnter += MouseEnterButonEvent;
             button.MouseLeave += MouseLeaveButonEvent;
             ContextMenu contextMenu = new ContextMenu();
-
+            contextMenu.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFAB8AB4"));
             MenuItem item1 = new MenuItem();
             item1.Header = "Add flashcard";
             item1.Click += (object s, RoutedEventArgs e) =>
             {
-
+                showFlashcardsClick(button, new RoutedEventArgs());
                 addOneFlashcard addOneFlashcard = new addOneFlashcard(button, list);
                 addOneFlashcard.ShowDialog();
 
@@ -102,10 +100,12 @@ namespace Program.view
         }
         private void Rename(object sender, RoutedEventArgs e)
         {
+        
             Button myButton;
             if (sender.GetType() == typeof(MenuItem)) { 
                 MenuItem item = (MenuItem)sender;
                 myButton = item.CommandParameter as Button;
+                FlashcardsRW.WriteFlashCards(myButton.Tag as Flashcards);
             }
             else
             {
@@ -122,7 +122,7 @@ namespace Program.view
 
 
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void AddFromFile(object sender, RoutedEventArgs e)
         {
             Button clickedButton = sender as Button;
             if (clickedButton != null)
@@ -138,17 +138,13 @@ namespace Program.view
         {
             Button clickedButton = sender as Button;
             if (clickedButton != null){
+
                 curentlyClickedButton = clickedButton;
                 Flashcards currentFlashcards = (Flashcards) clickedButton.Tag;
-                list = currentFlashcards.SetOfFlashcards.ToList();
+                list = currentFlashcards.SetOfFlashcards;
                 idx = 0;
-                if (list.Count > 0)
-                    showAnotherFlashcard();
-                else
-                {
-                    MainFlashcardButton.Tag = null;
-                    MainFlashcard.Text = "";
-                }
+                showAnotherFlashcard();
+
             }
            
 
@@ -157,32 +153,26 @@ namespace Program.view
         private void showAnotherFlashcard()
         {
             if(list != null && list.Count != 0 && idx >= 0)
-            {
-                MainFlashcardButton.Tag = list[idx];
                 MainFlashcard.Text = list[idx].Question;
-
-            }
+            
             else
-            {
-                MainFlashcardButton.Tag = null;
                 MainFlashcard.Text = "";
-            }
+            
                 
         }
 
         private void GoLeft_Click(object sender, RoutedEventArgs e)
         {
-            if (MainFlashcardButton.Tag != null)
+            if (list != null && list.Count != 0)
             {
                 idx = (idx + list.Count - 1) % list.Count;
-                MessageBox.Show(idx.ToString());
                 showAnotherFlashcard();
             }
         }
 
         private void GoRight_Click(object sender, RoutedEventArgs e)
         {
-            if (MainFlashcardButton.Tag != null)
+            if (list != null && list.Count != 0)
             {
                 idx = (idx + 1) % list.Count;
                 showAnotherFlashcard();
@@ -194,12 +184,11 @@ namespace Program.view
             Button button = sender as Button;
             if (MainFlashcard.Text != "")
             {
-                Flashcard flashcard = (Flashcard)button.Tag;
                 
-                if (flashcard.Question == MainFlashcard.Text)
-                    MainFlashcard.Text = flashcard.Answer;
+                if (list[idx].Question == MainFlashcard.Text)
+                    MainFlashcard.Text = list[idx].Answer;
                 else
-                    MainFlashcard.Text = flashcard.Question;
+                    MainFlashcard.Text = list[idx].Question;
             }
         }
 
@@ -228,7 +217,6 @@ namespace Program.view
                 Flashcards flashcards = (Flashcards)button.Tag;
                 FlashcardsRW.WriteFlashCards(flashcards);
             }
-            MessageBox.Show("Window is closing!");
         }
 
         private void CreateNew(object sender, RoutedEventArgs e)
@@ -261,7 +249,7 @@ namespace Program.view
             button.Background = new SolidColorBrush(lighter);
         }
 
-        private void MouseLeaveButonEvent(object sender, System.Windows.Input.MouseEventArgs e)
+        public void MouseLeaveButonEvent(object sender, System.Windows.Input.MouseEventArgs e)
         {
             Button btn = sender as Button;
             btn.Background = ButtonBrush;
@@ -269,7 +257,12 @@ namespace Program.view
 
         private void ChangeFlashcardEvent(object sender, RoutedEventArgs e)
         {
-
+            if (list != null && list.Count > 0)
+            {
+                addOneFlashcard addOneFlashcard = new addOneFlashcard(curentlyClickedButton, list, rename: true, idx);
+                addOneFlashcard.ShowDialog();
+                showAnotherFlashcard();
+            }
 
         }
 
@@ -277,17 +270,33 @@ namespace Program.view
         {
             if (list != null && list.Count != 0)
             {
-                MessageBox.Show("1");
-                Flashcards flashcards = (Flashcards)curentlyClickedButton.Tag;
-                MessageBox.Show("w");
-                flashcards.SetOfFlashcards.Remove(list[idx]);
                 list.RemoveAt(idx);
                 if(list.Count > 0 )
                     idx = (idx - 1 + list.Count) % list.Count;
                 showAnotherFlashcard();
-                }
             }
-
         }
+        private void ScoreButtonClickEvent(object sender, RoutedEventArgs e)
+        {
+            if (list != null && list.Count != 0)
+            {
+                ScoreModeWindow newWindow;
+                if ((sender as Button) == randomButton)
+                {
+                    var rng = new Random();
+                    var shuffled = list.OrderBy(x => rng.Next()).ToList();
+                    newWindow = new ScoreModeWindow(shuffled);
+                }
+                else
+                {
+                    newWindow = new ScoreModeWindow(list);
+                }
+
+                newWindow.ShowDialog();
+                
+            }
+        }
+
     }
+}
     

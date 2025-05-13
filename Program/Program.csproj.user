@@ -11,5 +11,8 @@
     <Compile Update="view\rename.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="view\ScoreModeWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 </Project>
