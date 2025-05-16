@@ -1,8 +1,8 @@
 ﻿
-FC:\Users\lukas\c#\Program\App.xaml;;
-FC:\Users\lukas\c#\Program\view\addFromFiel.xaml;;
-FC:\Users\lukas\c#\Program\view\addOneFlashcard.xaml;;
-FC:\Users\lukas\c#\Program\view\Main.xaml;;
-FC:\Users\lukas\c#\Program\view\rename.xaml;;
-FC:\Users\lukas\c#\Program\view\ScoreModeWindow.xaml;;
+FD:\c#\flashcards\Program\App.xaml;;
+FD:\c#\flashcards\Program\view\addOneFlashcard.xaml;;
+FD:\c#\flashcards\Program\view\Main.xaml;;
+FD:\c#\flashcards\Program\view\rename.xaml;;
+FD:\c#\flashcards\Program\view\ScoreModeWindow.xaml;;
+FD:\c#\flashcards\Program\view\addFromFile.xaml;;
 

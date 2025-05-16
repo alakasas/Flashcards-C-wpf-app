@@ -1,0 +1,12 @@
+Food
+Jedlo
+Mustard
+Horčica
+Keyboard
+Klavesnica
+Wall
+Stena
+Sea
+More
+Programing language
+Programovací jazyk

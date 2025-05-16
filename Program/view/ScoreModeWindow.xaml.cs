@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Program.models;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Program.models;
 
 namespace Program.view
 {
@@ -42,19 +32,31 @@ namespace Program.view
                 MainTextScoreMode.Text = list[idx].Question;
             else
             {
-                var result = MessageBox.Show(
-                    $"You had {correct.ToString()} out of {list.Count} correct which is {((int)(((float)correct / list.Count) * 100)).ToString()}%\nDo you want to repeat incorect qestions only?",
-                    "Confirmation",
-                    MessageBoxButton.YesNo);
+                if (IncorectList.Count > 0)
+                {
+                    var result = MessageBox.Show(
+                        $"You had {correct.ToString()} out of {list.Count} correct which is {((int)(((float)correct / list.Count) * 100)).ToString()}%\nDo you want to repeat incorect qestions only?",
+                        "Confirmation",
+                        MessageBoxButton.YesNo);
 
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        
+                        var newWindow = new ScoreModeWindow(IncorectList)
+                        {
+                            Owner = this.Owner,
+                            WindowStartupLocation = WindowStartupLocation.CenterOwner
+                        };
+                        this.Close();
+                        newWindow.ShowDialog();
+                    }
+                }
+                else
+                {
+                    var result = MessageBox.Show("Everything was correct");
+                }
                 this.Close();
 
-                if (result == MessageBoxResult.Yes)
-                {
-                    var newWindow = new ScoreModeWindow(IncorectList);
-                    newWindow.ShowDialog();
-                }
-                
             }
 
 

@@ -1,0 +1,15 @@
+﻿<Window x:Class="Program.view.addFromFile"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Program.view"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterOwner"
+        Title="addFromFile"  Height="138" Width="428">
+    <Grid Background="#FF4874A8" Margin="0,0,0,-6">
+        <TextBox x:Name="textbox" KeyDown="pressEnter" Margin="19,47,19,0" Background="#FF4C98CF" FontSize="18" Height="30" VerticalAlignment="Top"/>
+        <Button Margin="0,5,19,0" Click="ExploreWindow" Background="#FF4CC6CF" Height="34" VerticalAlignment="Top" HorizontalAlignment="Right" Width="121">Explore</Button>
+        <TextBlock Grid.Row="0" FontSize="24" FontWeight="Bold" LineHeight="6" Margin="20,5,143,0" Height="41" Text="Zadaj cestu k súboru" VerticalAlignment="Top"/>
+    </Grid>
+</Window>

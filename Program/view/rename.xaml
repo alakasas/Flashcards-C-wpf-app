@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Program.view"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterOwner"
         Title="rename" Height="123" Width="311">
     <Grid Background="#FF4874A8" Margin="0,0,0,-6">
         <TextBox x:Name="NewName" Margin="19,47,19,0" Background="#FF4C98CF" FontSize="18" Height="30" VerticalAlignment="Top"/>

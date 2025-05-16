@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Program.view"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterOwner"
         Title="ScoreModeWindow" Height="445" Width="795">
     <Grid ShowGridLines="False" Margin="0,0,0,-6">
         <Grid.ColumnDefinitions>
@@ -20,11 +21,6 @@
             <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
 
-
-
-        <!-- Oddelovacia čiara -->
-
-        <!-- Zvyšok rozhrania -->
         <Border
             Grid.Column="1"
             Grid.RowSpan="3"

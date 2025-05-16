@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Program.view"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterOwner"
         Title="addOneFlashcard" Height="225" Width="478" Background="#FF4874A8">
     <Grid Margin="20,0,24,1">
         <Grid.RowDefinitions>
@@ -20,6 +21,6 @@
         <TextBox x:Name="Qes" Background="#FF4C98CF" Margin="0,30,0,20" Grid.RowSpan="2" FontSize="18" FontWeight="Regular" Height="28"/>
         <TextBlock Grid.Row="1" FontSize="24" FontWeight="Bold" Margin="0,20,0,0" Grid.RowSpan="2">Answer</TextBlock>
         <TextBox Grid.Row="2" x:Name="Ans" Background="#FF4C98CF" Margin="0,10,0,20" FontSize="18" Grid.RowSpan="2" Height="28"/>
-        <Button Grid.Row="3" x:Name ="AddChangeButton" Click="addFlashcard" Height="33" Content="add" Margin="0,37,24,10" Background="#FF4CC6CF" HorizontalAlignment="Right" Width="72" Grid.RowSpan="2"/>
+        <Button Grid.Row="3" x:Name ="AddChangeButton" Click="addFlashcard" Height="33" Content="Add" Margin="0,37,24,10" Background="#FF4CC6CF" HorizontalAlignment="Right" Width="72" Grid.RowSpan="2"/>
     </Grid>
 </Window>

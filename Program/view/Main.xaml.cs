@@ -1,12 +1,9 @@
-﻿using System.Diagnostics;
+﻿using Program.functions;
+using Program.models;
 using System.IO;
-using System.Runtime.Intrinsics.X86;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Xml.Serialization;
-using Program.functions;
-using Program.models;
 
 namespace Program.view
 {
@@ -41,6 +38,7 @@ namespace Program.view
 
                 AddButtonToLeft(FlashcardPanel, fileName, flashcards);
             }
+            SortButtonsAlphabetically();
         }
         private Button AddButtonToLeft(StackPanel stackPanel, string fileName, Flashcards flashcards)
         {
@@ -67,7 +65,11 @@ namespace Program.view
             item1.Click += (object s, RoutedEventArgs e) =>
             {
                 showFlashcardsClick(button, new RoutedEventArgs());
-                addOneFlashcard addOneFlashcard = new addOneFlashcard(button, list);
+                addOneFlashcard addOneFlashcard = new addOneFlashcard(button, list)
+                {
+                    Owner = this,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner
+                };
                 addOneFlashcard.ShowDialog();
 
 
@@ -79,7 +81,7 @@ namespace Program.view
             item2.Click += Rename;
 
             MenuItem item3 = new MenuItem();
-            item3.Header = "delete";
+            item3.Header = "Delete";
             item3.Click += (s, e) =>
             {
                 File.Delete(flashcards.Path);
@@ -112,7 +114,11 @@ namespace Program.view
                 myButton = sender as Button;
             }
                 
-            rename rename = new rename(myButton);
+            rename rename = new rename(myButton)
+            {
+                Owner = this,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner
+            };
 
             rename.ShowDialog();
 
@@ -127,7 +133,11 @@ namespace Program.view
             Button clickedButton = sender as Button;
             if (clickedButton != null)
             {
-                addFromFile secondWindow = new addFromFile();
+                addFromFile secondWindow = new addFromFile()
+                {
+                    Owner = this,                             
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner
+                };
                 secondWindow.ShowDialog();
                 LoadFlashcardFiles();
             }
@@ -259,7 +269,11 @@ namespace Program.view
         {
             if (list != null && list.Count > 0)
             {
-                addOneFlashcard addOneFlashcard = new addOneFlashcard(curentlyClickedButton, list, rename: true, idx);
+                addOneFlashcard addOneFlashcard = new addOneFlashcard(curentlyClickedButton, list, rename: true, idx)
+                {
+                    Owner = this,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner
+                };
                 addOneFlashcard.ShowDialog();
                 showAnotherFlashcard();
             }
@@ -285,11 +299,19 @@ namespace Program.view
                 {
                     var rng = new Random();
                     var shuffled = list.OrderBy(x => rng.Next()).ToList();
-                    newWindow = new ScoreModeWindow(shuffled);
+                    newWindow = new ScoreModeWindow(shuffled)
+                    {
+                        Owner = this,
+                        WindowStartupLocation = WindowStartupLocation.CenterOwner
+                    };
                 }
                 else
                 {
-                    newWindow = new ScoreModeWindow(list);
+                    newWindow = new ScoreModeWindow(list)
+                    {
+                        Owner = this,
+                        WindowStartupLocation = WindowStartupLocation.CenterOwner
+                    };
                 }
 
                 newWindow.ShowDialog();
@@ -297,6 +319,52 @@ namespace Program.view
             }
         }
 
+        private void SearchBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            string query = SearchBox.Text.ToLower();
+            
+
+
+            foreach (var child in FlashcardPanel.Children)
+            {
+                if (child is Button btn)
+                {
+                    string content = btn.Content.ToString().ToLower();
+                    btn.Visibility = content.Contains(query) ? Visibility.Visible : Visibility.Collapsed;
+                }
+            }
+        }
+
+        private void SearchBoxPlaceHolder_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (SearchBoxPlaceHolder.Text == "search")
+            {
+                SearchBoxPlaceHolder.Text = "";
+            }
+
+
+        }
+
+        private void SearchBoxPlaceHolder_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (SearchBox.Text == "")
+            {
+                SearchBoxPlaceHolder.Text = "search";
+            }
+        }
+
+        private void SortButtonsAlphabetically()
+        {
+            var sorted = FlashcardPanel.Children
+                           .OfType<Button>()
+                           .OrderBy(b => b.Content?.ToString() ?? "")
+                           .ToList();
+
+            FlashcardPanel.Children.Clear();
+
+            foreach (var btn in sorted)
+                FlashcardPanel.Children.Add(btn);
+        }
     }
 }
     
