@@ -20,26 +20,36 @@ namespace Program.view
         public Window1()
         {
             InitializeComponent();
-            LoadFlashcardFiles();
+            this.Loaded += Window1_Loaded;
         }
-
-        private void LoadFlashcardFiles()
+        private async void Window1_Loaded(object sender, RoutedEventArgs e)
+        {
+            await LoadFlashcardFiles();
+        }
+        private async Task LoadFlashcardFiles()
         {
             FlashcardPanel.Children.Clear();
 
             string[] files = Directory.GetFiles(folderPath, "*.txt");
 
-            foreach (var file in files)
+            var tasks = files.Select(async file =>
             {
-                
                 string fileName = Path.GetFileNameWithoutExtension(file);
 
-                var flashcards = FlashcardsRW.ReadFlashCards(file);
+                var flashcards = await Task.Run(() => FlashcardsRW.ReadFlashCards(file));
 
-                AddButtonToLeft(FlashcardPanel, fileName, flashcards);
-            }
+                await Dispatcher.InvokeAsync(() =>
+                {
+                    AddButtonToLeft(FlashcardPanel, fileName, flashcards);
+                });
+            });
+
+            await Task.WhenAll(tasks);
+
             SortButtonsAlphabetically();
         }
+
+
         private Button AddButtonToLeft(StackPanel stackPanel, string fileName, Flashcards flashcards)
         {
             Button button = new Button
@@ -82,10 +92,10 @@ namespace Program.view
 
             MenuItem item3 = new MenuItem();
             item3.Header = "Delete";
-            item3.Click += (s, e) =>
+            item3.Click += async (s, e) =>
             {
                 File.Delete(flashcards.Path);
-                LoadFlashcardFiles();
+                await LoadFlashcardFiles();
             };
 
             // Add items to the context menu
@@ -100,14 +110,14 @@ namespace Program.view
             return button;
             
         }
-        private void Rename(object sender, RoutedEventArgs e)
+        private async void Rename(object sender, RoutedEventArgs e)
         {
         
             Button myButton;
             if (sender.GetType() == typeof(MenuItem)) { 
                 MenuItem item = (MenuItem)sender;
                 myButton = item.CommandParameter as Button;
-                FlashcardsRW.WriteFlashCards(myButton.Tag as Flashcards);
+                await FlashcardsRW.WriteFlashCards(myButton.Tag as Flashcards);
             }
             else
             {
@@ -122,13 +132,13 @@ namespace Program.view
 
             rename.ShowDialog();
 
-            LoadFlashcardFiles();
+            await LoadFlashcardFiles();
         }
             
 
 
 
-        private void AddFromFile(object sender, RoutedEventArgs e)
+        private async void AddFromFile(object sender, RoutedEventArgs e)
         {
             Button clickedButton = sender as Button;
             if (clickedButton != null)
@@ -139,7 +149,7 @@ namespace Program.view
                     WindowStartupLocation = WindowStartupLocation.CenterOwner
                 };
                 secondWindow.ShowDialog();
-                LoadFlashcardFiles();
+                await LoadFlashcardFiles();
             }
 
         }
@@ -219,17 +229,17 @@ namespace Program.view
             }
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             // Do something before the window closes
             foreach (Button button in FlashcardPanel.Children)
             {
                 Flashcards flashcards = (Flashcards)button.Tag;
-                FlashcardsRW.WriteFlashCards(flashcards);
+                await FlashcardsRW.WriteFlashCards(flashcards);
             }
         }
 
-        private void CreateNew(object sender, RoutedEventArgs e)
+        private async void CreateNew(object sender, RoutedEventArgs e)
         {
             string newFileName = "new";
             int num = 0;
@@ -240,7 +250,7 @@ namespace Program.view
                 filePath = Path.Combine(folderPath,"new" + num.ToString() + ".txt");
             }
             using (File.Create(filePath)) { }
-            LoadFlashcardFiles();
+            await LoadFlashcardFiles();
         }
 
         private void MouseEnterButonEvent(object sender, System.Windows.Input.MouseEventArgs e)

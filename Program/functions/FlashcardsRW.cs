@@ -38,14 +38,20 @@ namespace Program.functions
             return result;
         }
 
-        public static void WriteFlashCards(Flashcards flashcards)
+        public static async Task WriteFlashCards(Flashcards flashcards)
         {
             using (StreamWriter writer = new StreamWriter(flashcards.Path, append:false))
             {
-                foreach (Flashcard flashcard in flashcards.SetOfFlashcards){
-                    writer.WriteLine(flashcard.Question);
-                    writer.WriteLine(flashcard.Answer);
-                }
+                await Task.Run(() =>
+                {
+                    foreach (Flashcard flashcard in flashcards.SetOfFlashcards)
+                    {
+                        writer.WriteLine(flashcard.Question);
+                        writer.WriteLine(flashcard.Answer);
+                    }
+
+                });
+
             }
             return;
         }
