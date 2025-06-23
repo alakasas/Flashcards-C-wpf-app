@@ -30,7 +30,7 @@ namespace Program.view
             }
         }
 
-        private async void addFlashcard(object sender, RoutedEventArgs e)
+        private async void AddFlashcard(object sender, RoutedEventArgs e)
         {
             if (!rename)
             {

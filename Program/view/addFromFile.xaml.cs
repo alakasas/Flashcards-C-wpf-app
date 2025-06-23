@@ -15,7 +15,7 @@ namespace Program.view
             InitializeComponent();
         }
 
-        private void addFile(string filePath)
+        private void AddFile(string filePath)
         {
             string folderPath = Path.GetFullPath(@"..\..\..\filesFlashCards");
             string fileName = Path.GetFileName(filePath);
@@ -23,7 +23,7 @@ namespace Program.view
             File.Copy(filePath, newFilepath, overwrite: true);
         }
 
-        private async void pressEnter(object sender, KeyEventArgs e)
+        private async void PressEnter(object sender, KeyEventArgs e)
         {
             var tb = sender as TextBox;
             if (tb != null) {
@@ -41,7 +41,7 @@ namespace Program.view
                     {
                         await Task.Run(() =>
                         {
-                            addFile(path);
+                            AddFile(path);
                         });
                         this.Close(); 
                     }
@@ -70,7 +70,7 @@ namespace Program.view
                 string path = openFileDialog.FileName;
                 await Task.Run(() =>
                 {
-                    addFile(path);
+                    AddFile(path);
                 });
                 this.Close();
             }

@@ -65,7 +65,7 @@ namespace Program.view
                 
 
             };
-            button.Click += showFlashcardsClick;
+            button.Click += ShowFlashcardsClick;
             button.MouseEnter += MouseEnterButonEvent;
             button.MouseLeave += MouseLeaveButonEvent;
             ContextMenu contextMenu = new ContextMenu();
@@ -74,7 +74,7 @@ namespace Program.view
             item1.Header = "Add flashcard";
             item1.Click += (object s, RoutedEventArgs e) =>
             {
-                showFlashcardsClick(button, new RoutedEventArgs());
+                ShowFlashcardsClick(button, new RoutedEventArgs());
                 addOneFlashcard addOneFlashcard = new addOneFlashcard(button, list)
                 {
                     Owner = this,
@@ -154,7 +154,7 @@ namespace Program.view
 
         }
 
-        private void showFlashcardsClick(object sender, RoutedEventArgs e)
+        private void ShowFlashcardsClick(object sender, RoutedEventArgs e)
         {
             Button clickedButton = sender as Button;
             if (clickedButton != null){
@@ -163,14 +163,14 @@ namespace Program.view
                 Flashcards currentFlashcards = (Flashcards) clickedButton.Tag;
                 list = currentFlashcards.SetOfFlashcards;
                 idx = 0;
-                showAnotherFlashcard();
+                ShowAnotherFlashcard();
 
             }
            
 
         }
 
-        private void showAnotherFlashcard()
+        private void ShowAnotherFlashcard()
         {
             if(list != null && list.Count != 0 && idx >= 0)
                 MainFlashcard.Text = list[idx].Question;
@@ -181,25 +181,25 @@ namespace Program.view
                 
         }
 
-        private void GoLeft_Click(object sender, RoutedEventArgs e)
+        private void GoLeftClick(object sender, RoutedEventArgs e)
         {
             if (list != null && list.Count != 0)
             {
                 idx = (idx + list.Count - 1) % list.Count;
-                showAnotherFlashcard();
+                ShowAnotherFlashcard();
             }
         }
 
-        private void GoRight_Click(object sender, RoutedEventArgs e)
+        private void GoRightClick(object sender, RoutedEventArgs e)
         {
             if (list != null && list.Count != 0)
             {
                 idx = (idx + 1) % list.Count;
-                showAnotherFlashcard();
+                ShowAnotherFlashcard();
             }
         }
 
-        private void MainFlashcard_Click(object sender, RoutedEventArgs e)
+        private void MainFlashcardClick(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
             if (MainFlashcard.Text != "")
@@ -225,11 +225,11 @@ namespace Program.view
                     item.Answer = aux_string;
                 }
 
-                showAnotherFlashcard();
+                ShowAnotherFlashcard();
             }
         }
 
-        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private async void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             // Do something before the window closes
             foreach (Button button in FlashcardPanel.Children)
@@ -285,7 +285,7 @@ namespace Program.view
                     WindowStartupLocation = WindowStartupLocation.CenterOwner
                 };
                 addOneFlashcard.ShowDialog();
-                showAnotherFlashcard();
+                ShowAnotherFlashcard();
             }
 
         }
@@ -297,7 +297,7 @@ namespace Program.view
                 list.RemoveAt(idx);
                 if(list.Count > 0 )
                     idx = (idx - 1 + list.Count) % list.Count;
-                showAnotherFlashcard();
+                ShowAnotherFlashcard();
             }
         }
         private void ScoreButtonClickEvent(object sender, RoutedEventArgs e)
@@ -329,7 +329,7 @@ namespace Program.view
             }
         }
 
-        private void SearchBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        private void SearchBoxKeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
             string query = SearchBox.Text.ToLower();
             
@@ -345,7 +345,7 @@ namespace Program.view
             }
         }
 
-        private void SearchBoxPlaceHolder_GotFocus(object sender, RoutedEventArgs e)
+        private void SearchBoxPlaceHolderGotFocus(object sender, RoutedEventArgs e)
         {
             if (SearchBoxPlaceHolder.Text == "search")
             {
@@ -355,7 +355,7 @@ namespace Program.view
 
         }
 
-        private void SearchBoxPlaceHolder_LostFocus(object sender, RoutedEventArgs e)
+        private void SearchBoxPlaceHolderLostFocus(object sender, RoutedEventArgs e)
         {
             if (SearchBox.Text == "")
             {

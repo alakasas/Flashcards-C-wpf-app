@@ -8,7 +8,7 @@
         WindowStartupLocation="CenterOwner"
         Title="addFromFile"  Height="138" Width="428">
     <Grid Background="#FF4874A8" Margin="0,0,0,-6">
-        <TextBox x:Name="textbox" KeyDown="pressEnter" Margin="19,47,19,0" Background="#FF4C98CF" FontSize="18" Height="30" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox" KeyDown="PressEnter" Margin="19,47,19,0" Background="#FF4C98CF" FontSize="18" Height="30" VerticalAlignment="Top"/>
         <Button Margin="0,5,19,0" Click="ExploreWindow" Background="#FF4CC6CF" Height="34" VerticalAlignment="Top" HorizontalAlignment="Right" Width="121">Explore</Button>
         <TextBlock Grid.Row="0" FontSize="24" FontWeight="Bold" LineHeight="6" Margin="20,5,143,0" Height="41" Text="Zadaj cestu k súboru" VerticalAlignment="Top"/>
     </Grid>

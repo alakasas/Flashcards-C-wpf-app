@@ -22,11 +22,11 @@ namespace Program.view
         {
             this.list = list;
             InitializeComponent();
-            showAnotherFlashcardScore();
+            ShowAnotherFlashcardScore();
 
         }
 
-        public void showAnotherFlashcardScore()
+        public void ShowAnotherFlashcardScore()
         {
             if (list != null && list.Count != 0 && idx < list.Count)
                 MainTextScoreMode.Text = list[idx].Question;
@@ -99,14 +99,14 @@ namespace Program.view
         {
             idx++;
             correct++;
-            showAnotherFlashcardScore();
+            ShowAnotherFlashcardScore();
             wasCorrect.Background = green;
         }
         private void ButtonClickWrongEvent(object sender, RoutedEventArgs e)
         {
             IncorectList.Add(list[idx]);
             idx++;
-            showAnotherFlashcardScore();
+            ShowAnotherFlashcardScore();
             wasCorrect.Background = red;
         }
 
