@@ -1,30 +1,30 @@
 der Hund
-der	the dog
+the dog
 die Katze
-die	the cat
+the cat
 das Haus
-das	the house
+the house
 der Tisch
-der	the table
+the table
 die Blume
-die	the flower
+the flower
 das Buch
-das	the book
+the book
 der Stuhl
-der	the chair
+the chair
 die Schule
-die	the school
+the school
 das Auto
-das	the car
+the car
 der Apfel
-der	the apple
+the apple
 die Sonne
-die	the sun
+the sun
 das Kind
-das	the child
+the child
 der Freund
-der	the (male) friend
+the (male) friend
 die Stadt
-die	the city
+the city
 das Wasser
-das	the water
+the water
